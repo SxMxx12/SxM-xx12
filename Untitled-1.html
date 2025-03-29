@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تهنئة عيد الفطر</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #ffefba, #ffffff);
+            text-align: center;
+            padding: 50px;
+            color: #333;
+        }
+        .game-container {
+            display: none;
+            margin-top: 20px;
+        }
+        .balloon {
+            display: inline-block;
+            width: 50px;
+            height: 80px;
+            background: red;
+            border-radius: 50%;
+            margin: 10px;
+            cursor: pointer;
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        .card-container {
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            transform: scale(0.8);
+            animation: zoomIn 0.5s forwards;
+        }
+        .card h1 {
+            font-size: 2.5em;
+            color: #ff6f61;
+        }
+        .card p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        .decorations {
+            margin: 20px 0;
+        }
+        .decorations span {
+            font-size: 2em;
+            margin: 0 5px;
+            animation: float 2s infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        .open-btn {
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .open-btn:hover {
+            background: #ff3b2f;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <button class="open-btn" onclick="startGame()">ابدأ اللعبة</button>
+    <div class="game-container" id="gameContainer">
+        <h2>فرقع البالونات لفتح التهنئة!</h2>
+        <div id="balloons"></div>
+    </div>
+    <div class="card-container" id="cardContainer">
+        <div class="card">
+            <h1>عيد فطر مبارك!</h1>
+            <div class="decorations">
+                <span>🎉</span><span>🌙</span><span>✨</span><span>🎁</span>
+            </div>
+            <p>كل عام وأنتم بخير، أعاده الله علينا وعليكم بالخير واليمن والبركات.</p>
+            <p>نتمنى لكم عيداً مليئاً بالسعادة والفرح!</p>
+            <p>نسأل الله أن يجعل أيامكم كلها أعياداً، وأن يرزقكم الصحة والعافية.</p>
+            <p>عيدكم مبارك، وتقبل الله منا ومنكم صالح الأعمال.</p>
+        </div>
+    </div>
+    <div class="footer">
+        © 2025 - تهنئة عيد الفطر
+    </div>
+
+    <script>
+        function startGame() {
+            const gameContainer = document.getElementById('gameContainer');
+            const balloonsContainer = document.getElementById('balloons');
+            gameContainer.style.display = 'block';
+            balloonsContainer.innerHTML = '';
+
+            // Generate balloons
+            for (let i = 0; i < 10; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.onclick = () => popBalloon(balloon);
+                balloonsContainer.appendChild(balloon);
+            }
+        }
+
+        function popBalloon(balloon) {
+            balloon.remove();
+            const remainingBalloons = document.querySelectorAll('.balloon');
+            if (remainingBalloons.length === 0) {
+                showCard();
+            }
+        }
+
+        function showCard() {
+            const gameContainer = document.getElementById('gameContainer');
+            const cardContainer = document.getElementById('cardContainer');
+            gameContainer.style.display = 'none';
+            cardContainer.style.display = 'block';
+        }
+
+        function playAudio() {
+            const audio = document.getElementById('greetingAudio');
+            audio.play();
+        }
+    </script>
+</body>
+</html>
